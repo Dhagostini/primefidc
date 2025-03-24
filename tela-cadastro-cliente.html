@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Novos Clientes - Prime FIDC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #00377b;
+            --secondary-color: #019ad9;
+            --accent-color: #f27820;
+            --light-gray: #f5f5f5;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .header p {
+            font-weight: 300;
+            font-size: 16px;
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .form-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 20px;
+        }
+        
+        .form-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 22px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .form-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent-color);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 15px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(1, 154, 217, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+        
+        .col {
+            flex: 1;
+            padding: 0 15px;
+            min-width: 250px;
+        }
+        
+        .file-upload {
+            margin: 20px 0;
+        }
+        
+        .file-upload label {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            width: auto;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .file-upload label:hover {
+            background-color: #0183b8;
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        .file-name {
+            margin-left: 15px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--accent-color), #e06718);
+            color: var(--white);
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(242, 120, 32, 0.2);
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #e06718, #d55a10);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(242, 120, 32, 0.3);
+        }
+        
+        .button-blue {
+            background: linear-gradient(135deg, var(--secondary-color), #0183b8);
+            box-shadow: 0 4px 6px rgba(1, 154, 217, 0.2);
+        }
+        
+        .button-blue:hover {
+            background: linear-gradient(135deg, #0183b8, #016f9e);
+            box-shadow: 0 6px 8px rgba(1, 154, 217, 0.3);
+        }
+        
+        .required:after {
+            content: " *";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #52b69a, #43a680);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(82, 182, 154, 0.3);
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+        }
+        
+        .checkbox-container label {
+            display: inline;
+            font-weight: 400;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .col {
+                flex: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            .header {
+                padding: 20px 0;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/api/placeholder/200/80" alt="Prime FIDC Logo" class="logo">
+            <h1>Cadastro de Novos Clientes</h1>
+            <p>Complete o formulário abaixo para criar sua conta e enviar relatórios para análise</p>
+        </div>
+
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                <strong>Cadastro realizado com sucesso!</strong> Seus relatórios foram enviados para análise. Nossa equipe entrará em contato em breve.
+            </div>
+
+            <form id="registrationForm">
+                <!-- Informações Pessoais -->
+                <div class="form-section">
+                    <h2>Informações da Empresa</h2>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="companyName" class="required">Nome da Empresa</label>
+                                <input type="text" id="companyName" name="companyName" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="cnpj" class="required">CNPJ</label>
+                                <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                                <div class="help-text">Digite apenas números ou use o formato XX.XXX.XXX/XXXX-XX</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="industry">Setor/Indústria</label>
+                                <select id="industry" name="industry">
+                                    <option value="">Selecione...</option>
+                                    <option value="technology">Tecnologia</option>
+                                    <option value="finance">Finanças</option>
+                                    <option value="healthcare">Saúde</option>
+                                    <option value="education">Educação</option>
+                                    <option value="retail">Varejo</option>
+                                    <option value="manufacturing">Manufatura</option>
+                                    <option value="other">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="companySize">Tamanho da Empresa</label>
+                                <select id="companySize" name="companySize">
+                                    <option value="">Selecione...</option>
+                                    <option value="micro">Microempresa (até 9 funcionários)</option>
+                                    <option value="small">Pequena (10-49 funcionários)</option>
+                                    <option value="medium">Média (50-99 funcionários)</option>
+                                    <option value="large">Grande (100+ funcionários)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações de Contato -->
+                <div class="form-section">
+                    <h2>Informações de Contato</h2>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="contactName" class="required">Nome do Contato Principal</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="position">Cargo/Função</label>
+                                <input type="text" id="position" name="position">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="email" class="required">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="phone" class="required">Telefone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endereço -->
+                <div class="form-section">
+                    <h2>Endereço</h2>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="cep" class="required">CEP</label>
+                                <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                                <div class="help-text">Após preencher o CEP, os campos de endereço serão preenchidos automaticamente</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="street" class="required">Logradouro</label>
+                                <input type="text" id="street" name="street" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="number" class="required">Número</label>
+                                <input type="text" id="number" name="number" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="complement">Complemento</label>
+                                <input type="text" id="complement" name="complement">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="neighborhood" class="required">Bairro</label>
+                                <input type="text" id="neighborhood" name="neighborhood" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="city" class="required">Cidade</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="state" class="required">Estado</label>
+                                <select id="state" name="state" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acesso ao Sistema -->
+                <div class="form-section">
+                    <h2>Acesso ao Sistema</h2>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="username" class="required">Nome de Usuário</label>
+                                <input type="text" id="username" name="username" required>
+                                <div class="help-text">Será utilizado para acessar o sistema</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password" class="required">Senha</label>
+                                <input type="password" id="password" name="password" required>
+                                <div class="help-text">Mínimo de 8 caracteres, incluindo letra maiúscula, minúscula e número</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="confirmPassword" class="required">Confirmar Senha</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload de Relatórios -->
+                <div class="form-section">
+                    <h2>Relatórios para Análise</h2>
+                    <p>Faça upload dos relatórios necessários para análise. Formatos aceitos: PDF, XLSX, DOCX (máx. 10MB por arquivo)</p>
+                    
+                    <div class="form-group">
+                        <label for="reportType">Tipo de Relatório</label>
+                        <select id="reportType" name="reportType">
+                            <option value="">Selecione...</option>
+                            <option value="financial">Relatório Financeiro</option>
+                            <option value="operations">Relatório Operacional</option>
+                            <option value="marketing">Relatório de Marketing</option>
+                            <option value="sales">Relatório de Vendas</option>
+                            <option value="other">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="file-upload">
+                            <label for="reportFile">Selecionar Arquivo</label>
+                            <input type="file" id="reportFile" name="reportFile">
+                            <span class="file-name" id="fileName">Nenhum arquivo selecionado</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reportDescription">Descrição do Relatório</label>
+                        <textarea id="reportDescription" name="reportDescription" placeholder="Descreva brevemente o conteúdo do relatório..."></textarea>
+                    </div>
+
+                    <button type="button" id="addMoreFiles" class="button-blue">Adicionar Mais Arquivos</button>
+                </div>
+
+                <!-- Observações -->
+                <div class="form-section">
+                    <h2>Observações Adicionais</h2>
+                    
+                    <div class="form-group">
+                        <label for="additionalNotes">Observações</label>
+                        <textarea id="additionalNotes" name="additionalNotes" placeholder="Informações adicionais que possam ser relevantes para a análise..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Termos e Condições -->
+                <div class="form-section">
+                    <div class="form-group checkbox-container">
+                        <input type="checkbox" id="termsConditions" name="termsConditions">
+                        <label for="termsConditions" class="required">Li e concordo com os <a href="#">Termos e Condições</a> e <a href="#">Política de Privacidade</a></label>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn">Enviar Cadastro e Relatórios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Script para mostrar o nome do arquivo selecionado
+        document.getElementById('reportFile').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        // Script para adicionar mais campos de arquivo
+        document.getElementById('addMoreFiles').addEventListener('click', function() {
+            const fileUploadContainer = document.createElement('div');
+            fileUploadContainer.className = 'form-group';
+            
+            const timestamp = Date.now();
+            fileUploadContainer.innerHTML = `
+                <div class="file-upload">
+                    <label for="reportFile${timestamp}">Selecionar Arquivo</label>
+                    <input type="file" id="reportFile${timestamp}" name="reportFile">
+                    <span class="file-name">Nenhum arquivo selecionado</span>
+                </div>
+                <div class="form-group">
+                    <label for="reportDescription${timestamp}">Descrição do Relatório</label>
+                    <textarea id="reportDescription${timestamp}" name="reportDescription" placeholder="Descreva brevemente o conteúdo do relatório..."></textarea>
+                </div>
+            `;
+            
+            // Inserir antes do botão "Adicionar Mais Arquivos"
+            this.parentNode.insertBefore(fileUploadContainer, this);
+            
+            // Adicionar event listener para o novo input de arquivo
+            document.getElementById(`reportFile${timestamp}`).addEventListener('change', function() {
+                const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+                this.nextElementSibling.textContent = fileName;
+            });
+        });
+
+        // Script para validação básica e submissão do formulário
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validação de senha
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('As senhas não conferem. Por favor, verifique.');
+                return;
+            }
+            
+            // Validação de termos e condições
+            if (!document.getElementById('termsConditions').checked) {
+                alert('Você precisa aceitar os termos e condições para prosseguir.');
+                return;
+            }
+            
+            // Simulação do envio do formulário (substituir pelo envio real)
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Rolar até o topo para mostrar a mensagem de sucesso
+            window.scrollTo(0, 0);
+            
+            // Em uma aplicação real, você enviaria os dados do formulário para o servidor aqui
+        });
+        
+        // Simulação de autocomplete de CEP
+        document.getElementById('cep').addEventListener('blur', function() {
+            const cep = this.value.replace(/\D/g, '');
+            
+            if (cep.length === 8) {
+                // Simulação - em um ambiente real, você faria uma chamada para uma API de CEP
+                if (cep === '01310100') {
+                    document.getElementById('street').value = 'Avenida Paulista';
+                    document.getElementById('neighborhood').value = 'Bela Vista';
+                    document.getElementById('city').value = 'São Paulo';
+                    document.getElementById('state').value = 'SP';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
